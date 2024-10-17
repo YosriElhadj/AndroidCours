@@ -13,7 +13,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import tn.esprit.jetpack_nascar.ui.theme.NascarTheme
-import tn.esprit.jetpack_nascar.ui.theme.ToolbarLayout
 
 
 class MainActivity : ComponentActivity() {
@@ -43,7 +42,7 @@ fun MainScreen(navController: NavHostController) {
                 .padding(it)
         ) {
             NavigationButtons(navController)
-            Divider(modifier = Modifier.padding(vertical = 8.dp))
+            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
             NavigationHost(navController)
         }
     }

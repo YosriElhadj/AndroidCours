@@ -1,8 +1,8 @@
 package tn.esprit.jetpack_nascar
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,34 +17,42 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 
+
 @Composable
 fun EventsScreen() {
-    Column(
+    val eventTitles = listOf(
+        stringResource(R.string.event1),
+        stringResource(R.string.event2),
+        stringResource(R.string.event3),
+        stringResource(R.string.event4)
+    )
+
+    val eventDates = listOf(
+        stringResource(R.string.eventDate1),
+        stringResource(R.string.eventDate2),
+        stringResource(R.string.eventDate3),
+        stringResource(R.string.eventDate4)
+    )
+
+    val eventImages = listOf(
+        R.drawable.ic_event1,
+        R.drawable.ic_event2,
+        R.drawable.ic_event3,
+        R.drawable.ic_event4
+    )
+
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
             .padding(8.dp)
     ) {
-        EventCard(
-            imageRes = R.drawable.ic_event1,
-            title = stringResource(id = R.string.event1),
-            date = stringResource(id = R.string.eventDate1)
-        )
-        EventCard(
-            imageRes = R.drawable.ic_event2,
-            title = stringResource(id = R.string.event2),
-            date = stringResource(id = R.string.eventDate2)
-        )
-        EventCard(
-            imageRes = R.drawable.ic_event3,
-            title = stringResource(id = R.string.event3),
-            date = stringResource(id = R.string.eventDate3)
-        )
-        EventCard(
-            imageRes = R.drawable.ic_event4,
-            title = stringResource(id = R.string.event4),
-            date = stringResource(id = R.string.eventDate4)
-        )
+        items(eventTitles.size) { index ->
+            EventCard(
+                imageRes = eventImages[index],
+                title = eventTitles[index],
+                date = eventDates[index]
+            )
+        }
     }
 }
 

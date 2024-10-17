@@ -2,8 +2,7 @@ package tn.esprit.jetpack_nascar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -17,30 +16,39 @@ import androidx.compose.ui.unit.dp
 import tn.esprit.jetpack_nascar.ui.theme.NascarTheme
 
 
-
 @Composable
 fun NewsScreen() {
-    Column(
+    val newsTitles = listOf(
+        stringResource(R.string.news1),
+        stringResource(R.string.news2),
+        stringResource(R.string.news3)
+    )
+
+    val newsDescriptions = listOf(
+        stringResource(R.string.newsDesc1),
+        stringResource(R.string.newsDesc2),
+        stringResource(R.string.newsDesc3)
+    )
+
+    val newsImages = listOf(
+        R.drawable.ic_news1,
+        R.drawable.ic_news2,
+        R.drawable.ic_news3
+    )
+
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(8.dp)  // Outer padding for the whole screen
+            .padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)  // Adds space between items
     ) {
-        NewsCard(
-            imageRes = R.drawable.ic_news1,
-            title = stringResource(id = R.string.news1),
-            description = stringResource(id = R.string.newsDesc1)
-        )
-        NewsCard(
-            imageRes = R.drawable.ic_news2,
-            title = stringResource(id = R.string.news2),
-            description = stringResource(id = R.string.newsDesc2)
-        )
-        NewsCard(
-            imageRes = R.drawable.ic_news3,
-            title = stringResource(id = R.string.news3),
-            description = stringResource(id = R.string.newsDesc3)
-        )
+        items(newsTitles.size) { index ->
+            NewsCard(
+                imageRes = newsImages[index],
+                title = newsTitles[index],
+                description = newsDescriptions[index]
+            )
+        }
     }
 }
 
@@ -68,7 +76,7 @@ fun NewsCard(imageRes: Int, title: String, description: String) {
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = description,
-                    style =MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium
                 )
             }
         }
